@@ -1,0 +1,10 @@
+# Segredos e locais
+.env
+node_modules/
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

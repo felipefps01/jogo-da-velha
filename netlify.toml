@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[functions."generate"]
+  timeout = 26
+
+[functions."system-prompt"]
+  timeout = 10
