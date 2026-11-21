@@ -9,10 +9,19 @@
   const radiosTema = Array.from(document.querySelectorAll('input[name="tema"]'));
   const CHAVE_TEMA = "plani.tema";
 
+  const trocarTema = (efetiva) => {
+    const aplicar = () => raiz.setAttribute("tema", efetiva);
+    const movimentoReduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (document.startViewTransition && !movimentoReduzido) {
+      document.startViewTransition(aplicar);
+    } else {
+      aplicar();
+    }
+  };
+
   const aplicarTema = (preferencia) => {
     const escuraSistema = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const efetiva = preferencia === "sistema" ? (escuraSistema ? "escuro" : "claro") : preferencia;
-    raiz.setAttribute("tema", efetiva);
+    trocarTema(preferencia === "sistema" ? (escuraSistema ? "escuro" : "claro") : preferencia);
   };
 
   const iniciarTema = () => {

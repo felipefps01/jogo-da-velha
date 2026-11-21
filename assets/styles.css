@@ -53,7 +53,7 @@ body {
     radial-gradient(900px 460px at -10% 22%, color-mix(in srgb, var(--verde) 22%, transparent), transparent 60%),
     radial-gradient(700px 420px at 55% 108%, color-mix(in srgb, var(--coral) 20%, transparent), transparent 62%),
     var(--papel);
-  transition: background-color 0.35s ease, color 0.35s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
   overflow-x: hidden;
 }
 
@@ -353,3 +353,7 @@ table.plano th:last-child { border-top-right-radius: 14px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* Transição de tema: crossfade único da página (View Transitions) */
+::view-transition-group(root) { animation-duration: 0.28s; animation-timing-function: cubic-bezier(0.3, 0.7, 0.3, 1); }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.28s; mix-blend-mode: normal; }
