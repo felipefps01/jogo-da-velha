@@ -66,23 +66,33 @@
     return ponto === -1 ? "" : nome.slice(ponto);
   };
 
+  const ICONE_DOC = '<svg class="i ficha-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/></svg>';
+  const ICONE_DOC_LINHAS = '<svg class="i ficha-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>';
+  const ICONE_IMG = '<svg class="i ficha-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6" fill="currentColor" stroke="none"/><path d="M6 17l4-4 3 3 3-3 4 4"/></svg>';
+
   const iconeDe = (ext) =>
-    ext === ".pdf" ? "📕" : ext === ".png" || ext === ".jpg" || ext === ".jpeg" || ext === ".webp" || ext === ".gif" ? "🖼️" : ext === ".txt" ? "📄" : "📝";
+    ext === ".pdf" ? ICONE_DOC : ext === ".png" || ext === ".jpg" || ext === ".jpeg" || ext === ".webp" || ext === ".gif" ? ICONE_IMG : ext === ".txt" ? ICONE_DOC_LINHAS : ICONE_DOC_LINHAS;
+
+  const classeDe = (ext) =>
+    ext === ".pdf" ? "tipo-pdf" : ext === ".png" || ext === ".jpg" || ext === ".jpeg" || ext === ".webp" || ext === ".gif" ? "tipo-img" : ext === ".txt" ? "tipo-txt" : "tipo-md";
 
   const desenharArquivos = () => {
     const ul = $("lista-arquivos");
     ul.innerHTML = "";
     arquivos.forEach((arq, indice) => {
       const li = document.createElement("li");
+      li.classList.add(classeDe(extDe(arq.nome)));
       const span = document.createElement("span");
-      span.textContent = `${arq.icone} ${arq.nome}`;
+      span.innerHTML = arq.icone;
+      const nome = document.createElement("span");
+      nome.textContent = arq.nome;
       const x = document.createElement("button");
       x.className = "ficha-x";
       x.type = "button";
       x.textContent = "×";
       x.setAttribute("aria-label", `Remover ${arq.nome}`);
       x.addEventListener("click", () => { arquivos.splice(indice, 1); desenharArquivos(); });
-      li.append(span, x);
+      li.append(span, nome, x);
       ul.appendChild(li);
     });
   };
@@ -205,7 +215,7 @@
   $("btn-copiar").addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(markdownAtual);
-      toast("Markdown copiado! 📋");
+      toast("Markdown copiado!");
     } catch (e) {
       toast("Não foi possível copiar aqui.");
     }
@@ -232,7 +242,7 @@
     $("aviso-erro").hidden = true;
     const mes = $("sel-mes").value;
     if (!mes) {
-      erroEm("aviso-erro", "Escolha o mês do planejamento antes de gerar. 😊");
+      erroEm("aviso-erro", "Escolha o mês do planejamento antes de gerar.");
       return;
     }
 
@@ -256,7 +266,7 @@
       const dados = await resposta.json().catch(() => ({}));
       if (!resposta.ok) throw new Error(dados.erro || `Erro ${resposta.status} ao gerar.`);
       definirSaida(dados.texto || "");
-      toast("Planejamento pronto! ✨");
+      toast("Planejamento pronto!");
     } catch (e) {
       erroEm("aviso-erro", e.message || "Falha ao gerar o planejamento.");
     } finally {
@@ -313,7 +323,7 @@
     $("aviso-prompt").hidden = true;
     const { ok, dados } = await pedirPrompt($("inp-senha").value, "salvar", $("txt-prompt").value);
     if (!ok) { erroEm("aviso-prompt", dados.erro || "Não foi possível salvar."); return; }
-    toast("Prompt permanente salvo. 💾");
+    toast("Prompt permanente salvo.");
     fecharModal();
   });
 
@@ -323,7 +333,7 @@
     if (!ok) { erroEm("aviso-prompt", dados.erro || "Não foi possível restaurar."); return; }
     const leitura = await pedirPrompt($("inp-senha").value, "ler");
     $("txt-prompt").value = (leitura.dados && leitura.dados.prompt) || "";
-    toast("Restaurado para o padrão. ↺");
+    toast("Restaurado para o padrão.");
   });
 
   /* ---------- Início ---------- */

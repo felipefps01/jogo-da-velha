@@ -79,6 +79,22 @@ body {
 .visualmente-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .oculto { display: none !important; }
 
+/* Ícones SVG inline */
+.i {
+  width: 1.05em; height: 1.05em; display: inline-block; flex: none;
+  vertical-align: -0.18em;
+}
+.btn .i, .cartao-titulo .i { width: 1.15em; height: 1.15em; }
+
+/* Fichas */
+
+/* Fichas de arquivo */
+.ficha-i { width: 14px; height: 14px; }
+.lista-arquivos li.tipo-pdf .ficha-i { color: var(--coral); }
+.lista-arquivos li.tipo-img .ficha-i { color: var(--céu); }
+.lista-arquivos li.tipo-txt .ficha-i { color: var(--tinta-2); }
+.lista-arquivos li.tipo-md .ficha-i { color: var(--verde-v); }
+
 /* ---------- Cabeçalho ---------- */
 .cabeca {
   position: relative; z-index: 2;
@@ -103,10 +119,11 @@ body {
 }
 .tema-op input { position: absolute; opacity: 0; pointer-events: none; }
 .tema-op span {
-  display: inline-block; padding: 7px 14px; border-radius: 999px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; cursor: pointer;
   font-size: 0.82rem; font-weight: 700; color: var(--tinta-2);
   transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
 }
+.tema-op span .i { width: 0.95em; height: 0.95em; }
 .tema-op input:checked + span {
   color: #fff; background: linear-gradient(135deg, var(--tangerina), var(--coral));
   transform: scale(1.04); box-shadow: 0 4px 12px -4px rgba(255, 107, 71, 0.6);
@@ -182,7 +199,8 @@ main { position: relative; z-index: 2; }
 .cartao-saida { animation-delay: 0.24s; min-height: 520px; display: flex; flex-direction: column; }
 @media (max-width: 940px) { .cartao-form { position: static; } }
 
-.cartao-titulo { font-family: "Baloo 2", cursive; font-size: 1.3rem; margin: 0 0 16px; }
+.cartao-titulo { font-family: "Baloo 2", cursive; font-size: 1.3rem; margin: 0 0 16px; display: flex; align-items: center; gap: 8px; }
+.cartao-titulo .i { color: var(--coral); width: 1.2em; height: 1.2em; }
 
 .grade-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media (max-width: 560px) { .grade-2 { grid-template-columns: 1fr; } }
