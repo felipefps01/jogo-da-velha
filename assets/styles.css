@@ -183,7 +183,7 @@ main { position: relative; z-index: 2; }
 /* ---------- Palco ---------- */
 .palco {
   max-width: 1180px; margin: 26px auto 40px; padding: 0 24px;
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 22px; align-items: start;
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 22px; align-items: stretch;
 }
 @media (max-width: 940px) { .palco { grid-template-columns: 1fr; } }
 
@@ -195,9 +195,10 @@ main { position: relative; z-index: 2; }
   padding: 24px;
   animation: revelar 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
-.cartao-form { position: sticky; top: 18px; animation-delay: 0.16s; }
+.cartao-form { animation-delay: 0.16s; }
 .cartao-saida { animation-delay: 0.24s; min-height: 520px; display: flex; flex-direction: column; }
-@media (max-width: 940px) { .cartao-form { position: static; } }
+.saidas { display: flex; flex-direction: column; }
+@media (max-width: 940px) { .cartao-saida { min-height: 0; } }
 
 .cartao-titulo { font-family: "Baloo 2", cursive; font-size: 1.3rem; margin: 0 0 16px; display: flex; align-items: center; gap: 8px; }
 .cartao-titulo .i { color: var(--coral); width: 1.2em; height: 1.2em; }
